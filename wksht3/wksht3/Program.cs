@@ -11,53 +11,38 @@ namespace wksht3Solutions
 {
     public class Program
     {
-        public static void Main(String[]  args)
+        public static void Main(String[] args)
         {
 
 
-            // Action<string[]> action = new Action<string[]>(IterateOverArrOfStrings);
-            // action(args);
-
-
-           
-
-
+//question 1 (preffered)
             Action<string[]> val = delegate (string[] arr)
             {
 
                 foreach (string str in arr)
                 {
 
-                                Console.WriteLine(str);
-                     }
-                };
-            
+                    Console.WriteLine(str);
+                }
+            };
+
             val(args);
-            //Action<string> ac = new Action<string>((x) => Console.WriteLine(x));
-            //ac(args);
-
-            //foreach (string str in args)
-            //{
-
-            //    ac(str);
-            //}
-
-
-
-
-
-
 
         }
 
+        //question 1 (alternatively)
+//in main:{
+        // Action<string[]> action = new Action<string[]>(IterateOverArrOfStrings);
+        // action(args);
+        //}
 
-        //public static void IterateOverArrOfStrings(string[] arr) { 
+ // outside of main:{           //public static void IterateOverArrOfStrings(string[] arr) { 
         //    foreach(string str in arr) {
 
         //             Console.WriteLine(str);
         //    }
         //}
-
+//}
 
 
     }
