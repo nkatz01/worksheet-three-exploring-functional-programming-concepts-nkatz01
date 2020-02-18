@@ -14,12 +14,25 @@ namespace wksht3Solutions
     {
         public static void Main(String[] args)
         {
-			//https://stackoverflow.com/questions/6201306/how-to-convert-liststring-to-listint
-
- 	   
-	  myFilter(0, 10, n => n%2 == 0).ToList().ForEach(i => Console.WriteLine(i.ToString()));
-	  myFilter(0, 10, n => n%2 == 1).ToList().ForEach(i => Console.WriteLine(i.ToString()));
-        }
+			List<int> ls = new List<int>();
+			string userInput="";
+			int intVal;
+			double doubleVal;
+			
+			while (userInput!="end"){
+			Console.Write("Enter integer value, press 'end' to stop: ");
+			userInput = Console.ReadLine();
+			intVal = Convert.ToInt32(userInput);
+			ls.Add(intVal);
+			//Console.WriteLine("You entered {0}",intVal);
+			}
+			
+			
+			
+			
+			
+			
+			 }
 		
 
       public static void IterateOverArrOfStrings(string[] arr) { 
