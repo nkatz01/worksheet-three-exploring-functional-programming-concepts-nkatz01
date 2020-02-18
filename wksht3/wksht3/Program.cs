@@ -7,42 +7,51 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
+
 namespace wksht3Solutions
 {
     public class Program
     {
         public static void Main(String[] args)
         {
+			//https://stackoverflow.com/questions/6201306/how-to-convert-liststring-to-listint
 
-
-//question 1 (preffered)
-            Action<string[]> val = delegate (string[] arr)
-            {
-
-                foreach (string str in arr)
-                {
-
-                    Console.WriteLine(str);
-                }
-            };
-
-            val(args);
-
+ 	   
+	  myFilter(0, 10, n => n%2 == 0).ToList().ForEach(i => Console.WriteLine(i.ToString()));
+	  myFilter(0, 10, n => n%2 == 1).ToList().ForEach(i => Console.WriteLine(i.ToString()));
         }
+		
 
-        //question 1 (alternatively)
-//in main:{
-        // Action<string[]> action = new Action<string[]>(IterateOverArrOfStrings);
-        // action(args);
-        //}
+      public static void IterateOverArrOfStrings(string[] arr) { 
+           foreach(string str in arr) {
 
- // outside of main:{           //public static void IterateOverArrOfStrings(string[] arr) { 
-        //    foreach(string str in arr) {
+                   Console.WriteLine(str);
+           }
+        }
+		
+		// public static Func<List<int>, int> returnMinFrmCollec = n => n.Min();
+		public static List<int> myFilter( int min,  int max, Predicate<int> pred)
+		{	List<int> ls = new List<int>();
+		int i=0;
+			if (pred(min)){
+			for(  i=min; i<=max; i+=2){
+			ls.Add(i);
+			}
+			}
+			else{
+				for(i=min+1; i<=max; i+=2){
+				ls.Add(i);
+			}
+			
+			}
+			return ls;
+		}
+	
+    
 
-        //             Console.WriteLine(str);
-        //    }
-        //}
-//}
+
+
+
 
 
     }
