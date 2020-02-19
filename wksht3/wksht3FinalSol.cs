@@ -106,7 +106,11 @@ namespace wksht3Solutions
 			Program prg = new Program();
 				 
 			prg.Execute(funcLst, parameters);
-		
+
+//6
+
+			int[] ar = { 1, 2, 3, 4, 5, 6 };
+			removeDivisablesAndReverse(ar, 2);
 		}
 
 		public static void IterateOverArrOfStrings(string[] arr) { 
@@ -159,6 +163,22 @@ namespace wksht3Solutions
 				yield return n;
 			}
 		}
+
+
+		static IEnumerable<int> removeDivisablesAndReverse(IEnumerable<int> arr, int divisor)
+		{
+			Func<int, int, bool> deleg = Program.isDivisable.Compile();
+
+			IEnumerable<int> Results =
+				from i in arr
+				where deleg(i, divisor) == false
+				select i;
+
+			return Results.Reverse();
+		}
+
+		static Expression<Func<int, int, bool>> isDivisable = (dvdnd, dvsr) => dvdnd % dvsr == 0;
+
 
 
 
