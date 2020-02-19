@@ -11,14 +11,17 @@ namespace wksht3Solutions
 {
     public class Program
     {
+		//referring to 2
 		static Func<IEnumerable<string>, string, IEnumerable<string>> itemConcatenater = (n, s) => n.Select(i => i = s + i);
 		//releating to #5
 		Action<List<int>> print = n => n.ForEach(i => Console.Write(" " + i.ToString())); 
 		Func<List<int>, List<int>> addOne = n => n.Select( i => i + 1).ToList() ;
  		Func<List<int>, List<int>> multiply = n => n.Select( i => i * 2).ToList() ;
 		Func<List<int>, List<int>> subtractOne = n =>n.Select( i => i - 1).ToList() ;
-		
-        public static void Main(String[] args)
+		//referring to 6
+		static Func<List<int>, Predicate<int>, List<int>> predTester = (n, p) => n.Where(i => p(i) == true).Select(i => i).Reverse().ToList();
+
+		public static void Main(String[] args)
         {
 
  
@@ -48,7 +51,7 @@ namespace wksht3Solutions
 			// print(args);
 
 
-			//2
+//2
 			// args.ToList().ForEach(i => Console.WriteLine("Sir " + i.ToString()));
 
 			//alternatively
@@ -111,6 +114,19 @@ namespace wksht3Solutions
 
 			int[] ar = { 1, 2, 3, 4, 5, 6 };
 			removeDivisablesAndReverse(ar, 2);
+
+//6 alternatively
+
+			List<int> ls = new List<int>() { 1, 2, 3, 4, 5, 6 };
+			Predicate<int> predicate = (i) => i % 2 != 0;
+			 predTester(ls, predicate);
+
+//7
+			int n = 4;
+			List<string> ls = new List<string>() { "Kurnelia", "Qnaki", "Geo", "Muk", "Ivan" };
+			Func<IEnumerable<string>, int, List<string>> Results = (l, n) => l.Where(i => i.Length <= n).Select(i => i).ToList();
+			Results(ls, n).ForEach(i => Console.Write(" " + i));
+
 		}
 
 		public static void IterateOverArrOfStrings(string[] arr) { 
