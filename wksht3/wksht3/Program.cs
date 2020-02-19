@@ -30,10 +30,12 @@ namespace wksht3Solutions
 
 		public static void Main(String[] args)
 		{
-			int n = 4;
-			List<string> ls = new List<string>() {"Kurnelia","Qnaki","Geo","Muk","Ivan" };
-			Func<IEnumerable<string>, int, List<string>> Results = (l, n) => l.Where(i => i.Length <= n).Select(i => i).ToList();
-			Results(ls, n).ForEach(i => Console.Write(" " + i));
+			int[] ar = { 1, 2, 3, 4, 5, 6 };
+
+			//mySorter ms = new mySorter();
+			Array.Sort(ar, new mySorter());
+			//Console.Write(ms.Compare(2,1));
+			Console.WriteLine("[{0}]", string.Join("," ,ar));
 		}
 		static IEnumerable<int>  Iter(IEnumerable<int> collec)
 		{
@@ -46,4 +48,17 @@ namespace wksht3Solutions
 	 
 	}
 
+	class mySorter : IComparer<int>
+	{
+
+		public int Compare(int i, int j)
+		{
+			if (i == j)
+				return 0;
+			else if (i % 2 == 0 && j % 2 != 0 || i % 2 == 0 && j % 2 == 0 && i < j || i % 2 != 0 && j % 2 != 0 && i < j)
+				return  -1;
+			else return 1;
+		}
+
+	}
 }
