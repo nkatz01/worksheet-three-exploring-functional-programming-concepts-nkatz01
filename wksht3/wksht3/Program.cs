@@ -7,32 +7,24 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.Reflection;
+using System.Data;
  
-
 namespace wksht3Solutions
 {
-	/* public class Example{
-		List<int> numbers2 = new List<int>() { 2, 3, 5, 7 };
-		  Func<int, int> addOne = n => n + 1;
-		Func<int, int> multiply = n => n * 2;
-		Func<int, int> subtractOne = n => n - 1;
-		Action<List<int>> print = n => n.ForEach(i => Console.Write(" " + i.ToString()));
-	
-		
-	} */
+	 
     public class Program
-    {
-		
-	 List<int> numbers2 = new List<int>() { 2, 3, 5, 7 };
-		  Func<int, int> addOne = n => n + 1;
-		Func<int, int> multiply = n => n * 2;
-		Func<int, int> subtractOne = n => n - 1;
-		Action<List<int>> print = n => n.ForEach(i => Console.Write(" " + i.ToString()));
-	
+    { 
+		 
+	 
+		Action<List<int>> print = n => n.ForEach(i => Console.Write(" " + i.ToString())); 
+		Func<List<int>, List<int>> addOne = n => n.Select( i => i + 1).ToList() ;
+ 		Func<List<int>, List<int>> multiply = n => n.Select( i => i * 2).ToList() ;
+		Func<List<int>, List<int>> subtractOne = n =>n.Select( i => i - 1).ToList() ;
+	 
 		
 		public static void Main(String[] args)
 		{
-			/* List<int> ls = new List<int>();
+			  List<int> parameters = new List<int>();
 			string userInput = "";
 			int intVal;
 
@@ -43,77 +35,53 @@ namespace wksht3Solutions
 				Console.Write("Enter integer value, press 'end' to stop: ");
 				userInput = Console.ReadLine();
 				if (int.TryParse(userInput, out intVal))
-					ls.Add(intVal);
+					parameters.Add(intVal);
 
-				// Console.WriteLine("You entered  ",ls.ToString());
-			} */
+ 			}  
+			userInput="";
+			List<string> funcLst = new List<string>();
+			while (userInput != "end")
+			{
+				Console.Write("Enter function: eg 'addOne', 'multiply', 'subtractOne'; and press 'end' to stop: ");
+				userInput = Console.ReadLine();
+				if( userInput == "addOne" || userInput == "multiply" || userInput == "subtractOne" )
+				{
+						funcLst.Add(userInput);
+				}else{
+						Console.WriteLine("The command you entered is not recognised");
+					 }
+				 
+			}
+			
+			
+			
+			
 			Program prg = new Program();
-			prg.Fire();
-		}
-	public void Fire()
-        {
-				
- 	     FieldInfo field = this.GetType().GetField("addOne", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-		Delegate method = field.GetValue(this) as Delegate;
-	var val =	method.Method.Invoke(method.Target, new object[1]{10});
-Console.WriteLine(val);
-		}
-
-		
-			//List<int> funcs = new List<int>();
-			//while (userInput != "end")
-			//{
-			//	Console.Write("Enter function: eg 'addOne', 'multiply', 'subtractOne', or 'print'; and press 'end' to stop: ");
-			//	switch (userInput)
-			//	{
-			//		case "addOne":
-
-			//			break;
-			//		case "multiply":
-
-			//			break;
-			//		case "subtractOne":
-
-			//			break;
-			//		case "print":
-			//			break;
-			//		default:
-			//			Console.WriteLine("Default case");
-			//			break;
-			//	}
-			//	funct.Add(userInput)
-			//}
-
-
-
-			//ls.ForEach(i => Console.Write(" " + i.ToString()));
-
-
-
-
-		 
-
-			//Program prg = new Program();
+				 
+			prg.Execute(funcLst, parameters);
 			 
-			//print(ls);
+		}
+	public void Execute(List<string> funcLst, List<int> parameters  )//https://stackoverflow.com/questions/6010555/how-to-call-delegate-from-string-in-c
+        {  FieldInfo field   ;
+			 Delegate method  ;
+			List<int> ls = new List<int>();
+			foreach(string funcName in funcLst){
+			
+ 	       field = this.GetType().GetField(funcName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+		 method = field.GetValue(this) as Delegate;
+		  parameters = (List<int>)method.Method.Invoke(method.Target, new object[1]{parameters});//print(modified.ToList())IEnumerable<int>
+			}
+			print(parameters);
+		  
+		
+		 
+		}
+
+		
 			 
-			//Func<int, bool> isZero = n => n == 0;
 
-/* typeof(Container)
-    .GetMethod(cmd, BindingFlags.Static | BindingFlags.Public)
-    .Invoke(null, new object[0]); */
-		
-		 
-		 
 
-		 
-
-			  
-
-		//}
-		
-		// public static Func<List<int>, int> returnMinFrmCollec = n => n.Min();
-	
+ 
 
     }
 
