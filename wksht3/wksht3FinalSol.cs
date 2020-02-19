@@ -11,6 +11,7 @@ namespace wksht3Solutions
 {
     public class Program
     {
+		static Func<IEnumerable<string>, string, IEnumerable<string>> itemConcatenater = (n, s) => n.Select(i => i = s + i);
 		//releating to #5
 		Action<List<int>> print = n => n.ForEach(i => Console.Write(" " + i.ToString())); 
 		Func<List<int>, List<int>> addOne = n => n.Select( i => i + 1).ToList() ;
@@ -36,28 +37,36 @@ namespace wksht3Solutions
 
 
 
-// or alternatively
-		//args.ToList().ForEach(i => Console.WriteLine(i.ToString()));//https://stackoverflow.com/questions/16265247/printing-all-contents-of-array-in-c-sharp
+			// or alternatively
+			//args.ToList().ForEach(i => Console.WriteLine(i.ToString()));//https://stackoverflow.com/questions/16265247/printing-all-contents-of-array-in-c-sharp
 
-		//or (2nd alternative)
-		//Array.ForEach(args, Console.WriteLine);
+			//or (2nd alternative)
+			//Array.ForEach(args, Console.WriteLine);
 
-//question 1 (3rd alternative)
-        // Action<string[]> print = new Action<string[]>(IterateOverArrOfStrings);
-        // print(args);
-     
+			//question 1 (3rd alternative)
+			// Action<string[]> print = new Action<string[]>(IterateOverArrOfStrings);
+			// print(args);
 
-//2
+
+			//2
 			// args.ToList().ForEach(i => Console.WriteLine("Sir " + i.ToString()));
-			
+
+			//alternatively
+
+			foreach (string s in Iter(Program.itemConcatenater(args, "Sir ")))
+			{
+				Console.WriteLine(s);
+			}
+
+
 //3
-		/* if (args.Length!=0){
-	Console.WriteLine(returnMinFrmCollec(args.Select(int.Parse).ToList()));
-	} */
-	
-//4
-	
-	myFilter(0, 10, n => n%2 == 0).ToList().ForEach(i => Console.WriteLine(i.ToString()));
+			/* if (args.Length!=0){
+		Console.WriteLine(returnMinFrmCollec(args.Select(int.Parse).ToList()));
+		} */
+
+			//4
+
+			myFilter(0, 10, n => n%2 == 0).ToList().ForEach(i => Console.WriteLine(i.ToString()));
 	myFilter(0, 10, n => n%2 == 1).ToList().ForEach(i => Console.WriteLine(i.ToString()));
 		
 		
@@ -141,9 +150,17 @@ namespace wksht3Solutions
 		
 		 
 		}
-		
-		
-		
 
-    }
+
+		static IEnumerable<string> Iter(IEnumerable<string> collec)
+		{
+			foreach (string n in collec)
+			{
+				yield return n;
+			}
+		}
+
+
+
+	}
 }
