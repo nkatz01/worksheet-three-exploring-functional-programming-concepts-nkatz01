@@ -18,10 +18,10 @@ namespace wksht3Solutions
 		//Func<Func<int, int, bool>, IEnumerable<int>> applyPredOnList = (d,l) => FindAll() d(i) == true  % n == 0);
 	
 
-		static Func<List<int>, Predicate<int>, List<int>> predTester = (n, p) => n.Where(i => p(i) == true).Select(i => i).Reverse().ToList();
+		static Func<IEnumerable<int>, Predicate<int>, IEnumerable<int>> predTester = (n, p) => n.Where(i => p(i) == true).Select(i => i);
 
 		static Func<IEnumerable<string>, string, IEnumerable<string>> itemConcatenater = (n, s) => n.Select(i => i = s + i);
-		static Action<List<int>> print = n => n.ForEach(i => Console.Write(" " + i.ToString()));
+		Action<List<int>> print = n => n.ForEach(i => Console.Write(" " + i.ToString()));
 		Func<List<int>, List<int>> addOne = n => n.Select(i => i + 1).ToList();
 		Func<List<int>, List<int>> multiply = n => n.Select(i => i * 2).ToList();
 		Func<List<int>, List<int>> subtractOne = n => n.Select(i => i - 1).ToList();
@@ -30,11 +30,23 @@ namespace wksht3Solutions
 
 		public static void Main(String[] args)
 		{
-			List<int> ls = new List<int>(){1, 2,3,4,5,6};
-			Predicate<int> predicate = (i) => i % 2 != 0;
-
-			Program.print(predTester(ls, predicate));
+			int[] ar = {1, 2,3,4,5,6};
 			
+			//Predicate<int> predicate = new Predicate<int>(isDivisable);
+
+			//Console.WriteLine(deleg(10, 2) == true) ;
+
+			foreach (int s in Iter(removeDivisablesAndReverse(ar,2)))
+			{
+				Console.Write(" " + s);
+			}
+
+
+
+			//foreach (int s in Iter(Program.predTester(ar, predicate)))
+			//{
+			//	Console.Write(s);
+			//}
 
 		}
 		static IEnumerable<int>  Iter(IEnumerable<int> collec)
@@ -45,7 +57,18 @@ namespace wksht3Solutions
 			}
 		}
 
-	 
+		static IEnumerable<int> removeDivisablesAndReverse(IEnumerable<int> arr, int divisor) {
+			Func<int, int, bool> deleg = Program.isDivisable.Compile();
+			 
+			IEnumerable<int> Results =
+				from i in arr
+				where deleg(i, divisor) == false
+				select i;
+
+			return Results.Reverse();
+		}
+
+		static Expression<Func<int,int, bool>> isDivisable = (dvdnd, dvsr)  =>    dvdnd % dvsr == 0;
 	}
 
 }
