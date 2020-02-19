@@ -15,7 +15,6 @@ namespace wksht3Solutions
 
 	public class Program
 	{
-		//Func<Func<int, int, bool>, IEnumerable<int>> applyPredOnList = (d,l) => FindAll() d(i) == true  % n == 0);
 	
 
 		static Func<List<int>, Predicate<int>, List<int>> predTester = (n, p) => n.Where(i => p(i) == true).Select(i => i).Reverse().ToList();
@@ -26,15 +25,28 @@ namespace wksht3Solutions
 		Func<List<int>, List<int>> multiply = n => n.Select(i => i * 2).ToList();
 		Func<List<int>, List<int>> subtractOne = n => n.Select(i => i - 1).ToList();
 
-
+		static Func<int, List<int>> returnList = n => Enumerable.Range(0, n).ToList();
+		//Func<IEnumerable<int>, IEnumerable<int>>(fctrs,n) => fctrs.Where(i => n).Select(i => i).Reverse().ToList()
 
 		public static void Main(String[] args)
 		{
-			int[] ar = { 1, 2, 3, 4, 5, 6 };
 
-			Array.Sort(ar, new mySorter());
-			Console.WriteLine("[{0}]", string.Join("," ,ar));
+		//	predClass<int,int> pc = new predClass();
+			//	int[] ar = { 1, 2, 3, 4, 5, 6 };
+			Predicate<List<int>> pred = (n) => n.Where(i => i < 5).Select(i => i).ToList();
+			List<int> fctrs = new List<int>{ 1, 2, 3, 4, 5, 6 };
+			List<int> dividends = Program.returnList(10);
+			//Console.WriteLine(ls.FindAll(i => pred(i) == true));
+			//List<int> newls = ls.FindAll(i => pred(i) == true).Where(i => i< 5).Select(i => i).ToList();
+			dividends.FindAll(pred(fctrs));
+			IEnumerable<int> newls = dividends.FindAll(i => fctrs.TrueForAll() == true).Where(i => i < 5).Select(i => i).ToList();
+
+			Console.WriteLine("[{0}]", string.Join(",", newls));
 		}
+
+
+
+
 		static IEnumerable<int>  Iter(IEnumerable<int> collec)
 		{
 			foreach (int n in collec)
@@ -46,17 +58,14 @@ namespace wksht3Solutions
 	 
 	}
 
-	class mySorter : IComparer<int>
-	{
+	//class predClass<T, U> {
+	//	T A { get; set; }
+	//	U B { get; set; }
+	//	public predClass(T t, U u) {
+	//		A = t;
+	//		B = u;
+	//	}
+	//}
 
-		public int Compare(int i, int j)
-		{
-			if (i == j)
-				return 0;
-			else if (i % 2 == 0 && j % 2 != 0 || i % 2 == 0 && j % 2 == 0 && i < j || i % 2 != 0 && j % 2 != 0 && i < j)
-				return  -1;
-			else return 1;
-		}
-
-	}
+ 
 }
