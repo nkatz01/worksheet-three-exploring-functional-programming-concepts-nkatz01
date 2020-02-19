@@ -32,9 +32,7 @@ namespace wksht3Solutions
 		{
 			int[] ar = { 1, 2, 3, 4, 5, 6 };
 
-			//mySorter ms = new mySorter();
 			Array.Sort(ar, new mySorter());
-			//Console.Write(ms.Compare(2,1));
 			Console.WriteLine("[{0}]", string.Join("," ,ar));
 		}
 		static IEnumerable<int>  Iter(IEnumerable<int> collec)

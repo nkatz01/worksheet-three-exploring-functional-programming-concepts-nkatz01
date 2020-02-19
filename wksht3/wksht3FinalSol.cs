@@ -126,7 +126,11 @@ namespace wksht3Solutions
 			List<string> ls = new List<string>() { "Kurnelia", "Qnaki", "Geo", "Muk", "Ivan" };
 			Func<IEnumerable<string>, int, List<string>> Results = (l, n) => l.Where(i => i.Length <= n).Select(i => i).ToList();
 			Results(ls, n).ForEach(i => Console.Write(" " + i));
+//8
+			int[] ar = { 1, 2, 3, 4, 5, 6 };
 
+			Array.Sort(ar, new mySorter());
+			Console.WriteLine("[{0}]", string.Join(",", ar));
 		}
 
 		public static void IterateOverArrOfStrings(string[] arr) { 
@@ -197,6 +201,20 @@ namespace wksht3Solutions
 
 
 
+
+	}
+
+	class mySorter : IComparer<int>
+	{
+
+		public int Compare(int i, int j)
+		{
+			if (i == j)
+				return 0;
+			else if (i % 2 == 0 && j % 2 != 0 || i % 2 == 0 && j % 2 == 0 && i < j || i % 2 != 0 && j % 2 != 0 && i < j)
+				return -1;
+			else return 1;
+		}
 
 	}
 }
