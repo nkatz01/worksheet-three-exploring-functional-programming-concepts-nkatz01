@@ -53,10 +53,10 @@ namespace wksht3Solutions
 
 			//alternatively
 
-			foreach (string s in Iter(Program.itemConcatenater(args, "Sir ")))
-			{
-				Console.WriteLine(s);
-			}
+			//foreach (string s in Iter(Program.itemConcatenater(args, "Sir ")))
+			//{
+			//	Console.WriteLine(s);
+			//}
 
 
 //3
