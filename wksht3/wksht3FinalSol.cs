@@ -67,7 +67,7 @@ namespace wksht3Solutions
 		Console.WriteLine(returnMinFrmCollec(args.Select(int.Parse).ToList()));
 		} */
 
-			//4
+//4
 
 			myFilter(0, 10, n => n%2 == 0).ToList().ForEach(i => Console.WriteLine(i.ToString()));
 	myFilter(0, 10, n => n%2 == 1).ToList().ForEach(i => Console.WriteLine(i.ToString()));
@@ -87,26 +87,30 @@ namespace wksht3Solutions
 				if (int.TryParse(userInput, out intVal))
 					parameters.Add(intVal);
 
- 			}  
-			userInput="";
+ 			}
+			userInput = "";
+			Program prg = new Program();
+			FieldInfo field;
 			List<string> funcLst = new List<string>();
 			while (userInput != "end")
 			{
 				Console.Write("Enter function: eg 'addOne', 'multiply', 'subtractOne'; and press 'end' to stop: ");
 				userInput = Console.ReadLine();
-				if( userInput == "addOne" || userInput == "multiply" || userInput == "subtractOne" )
+				field = prg.GetType().GetField(userInput, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+
+				if (field != null)
 				{
-						funcLst.Add(userInput);
-				}else{
-						Console.WriteLine("The command you entered is not recognised");
-					 }
-				 
+					funcLst.Add(userInput);
+
+				}
+				else
+				{
+					Console.WriteLine("The command you entered is not recognised");
+				}
+
 			}
-			
-			
-			
-			
-			Program prg = new Program();
+
+ 
 				 
 			prg.Execute(funcLst, parameters);
 
@@ -131,6 +135,13 @@ namespace wksht3Solutions
 
 			Array.Sort(ar, new mySorter());
 			Console.WriteLine("[{0}]", string.Join(",", ar));//https://stackoverflow.com/questions/35394754/how-to-use-a-custom-comparer-to-sort-an-array-in-a-different-lexical-order
+
+//9
+			Func<int, List<int>, bool> pred = (d, fctrs) => fctrs.TrueForAll(f => d % f == 0);
+			List<int> dividends = Program.returnList(11);
+			List<int> fctrs = new List<int> { 1, 1, 1, 2 };
+			IEnumerable<int> newlst = dividends.FindAll(i => pred(i, fctrs) == true);
+			Console.WriteLine("[{0}]", string.Join(",", newlst));
 		}
 
 		public static void IterateOverArrOfStrings(string[] arr) { 
