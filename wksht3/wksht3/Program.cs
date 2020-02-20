@@ -14,68 +14,94 @@ using System.Runtime;
 
 namespace wksht3Solutions
 {
-
+	
 	public class Program
 	{
-		public delegate bool Del(string str);
-
+		public delegate bool Del1(string str);
+		//public delegate int Del2(int i, int j);
+		//public delegate string Del3(string s);
 		//static Func<List<string>, string, int> removeAllstartswith = (n, s) => n.RemoveAll(i => i.StartsWith(s)==true);
 		// static Func<List<string>, string, int> removeAllendsswith = (n, s) => n.RemoveAll(i => i.EndsWith(s) == true);
-	//	static Func<List<string>, string, Func<string, bool>, int> removeAllstartsOrEndsWith = (n, s,p) => n.RemoveAll(i => i.p(s) == true);
+		//  Func<Func<string, bool>,string, string, bool> p = (strtOrEnd,  s1, s2) => Del(s2) == true;
+		static Func<List<string>, string, string, int> removeAllstartsOrEndsWith = (n, s ,funcName) => n.RemoveAll(i => myStartOrEndWith(funcName, i, s) == true);
+		static Func<List<string>, string, string, int> copyAllstartsOrEndsWith = (n, s, funcName) => n.Insert(i => myStartWith(funcName, i, s) == true);
 
-		//Func<IEnumerable<string>, int, List<string>> Results = (l, n) => l.Where(i => i.Length <= n).Select(i => i).ToList();
+		Func<IEnumerable<string>, int,bool, List<string>> filterNamesWithGivenLen = (l, n, t) => l.Where(i => i.Length = n).Select(i => myLengthRemovOrDoublr().ToList();
 
+		static public bool myStartOrEndWith(string nameOfFunc, string s1, string s2)
+		{
+			Del1 strtOrEndWith;
+			Delegate del = Delegate.CreateDelegate(typeof(Del1), s1, nameOfFunc);
+			strtOrEndWith =(Del1) del;
+			return  strtOrEndWith(s2);
+		}
 
+		static public bool myLengthRemovOrDoublr(string nameOfFunc, string s1, string s2)
+		{
+			Del1 strtOrEndWith;
+			Delegate del = Delegate.CreateDelegate(typeof(Del1), s1, nameOfFunc);
+			strtOrEndWith = (Del1)del;
+			return strtOrEndWith(s2);
+		}
+		//static public int Applyoperator(int i, int j , string symbol)
+		//	{
+
+		//		Del2 arithmeticSymbol;
+		//		Delegate del = Delegate.CreateDelegate(typeof(Del2), exp, symbol);
+		//		arithmeticSymbol = (Del2)del;
+		//		return arithmeticSymbol(i, j).Compile();
+		//	}
+		//static public string Applyoperator(string s1, string s2, string symbol)
+		//{
+		//	Del3 stringOperand;
+		//	Delegate del = Delegate.CreateDelegate(typeof(Del3), s1, symbol);
+		//	stringOperand = (Del3)del;
+		//	return (s2);
+		//}
+
+		//public void applyOperator() {
+		//	Func<List<T>, List<T>> addOne = n => n.Select(i => i + 1).ToList();
+		//	List<int>  lsInts = new List<int> { 1, 2, 3 };
+		//	List<string> lsStrs = new List<string> { "hi", "itchy", "kitchy" }; 
+		//	 List<int> lsIntsProc = addOne<int>(lsInts);
+		//	  List<string> lststrProc = addOne<string>(lsStrs);
+
+		//}
 
 
 		static Func<List<int>, Predicate<int>, List<int>> predTester = (n, p) => n.Where(i => p(i) == true).Select(i => i).Reverse().ToList();
 		static Func<IEnumerable<string>, string, IEnumerable<string>> itemConcatenater = (n, s) => n.Select(i => i = s + i);
 		static Action<List<int>> print = n => n.ForEach(i => Console.Write(" " + i.ToString()));
-	 	Func<List<int>, List<int>> addOne = n => n.Select(i => i + 1).ToList();
+		Func<List<int>, List<int>> addOne = n => n.Select(i => i + 1).ToList();
 		  Func<List<int>, List<int>> multiply = n => n.Select(i => i * 2).ToList();
 		  Func<List<int>, List<int>> subtractOne = n => n.Select(i => i - 1).ToList();
 		static Func<int, List<int>> returnList = n => Enumerable.Range(0, n).ToList();
- 
+	
 		public static void Main(String[] args)
 		{
 			List<string> ls = new List<string>() { "Kurnelia", "Qnaki", "Geo", "Muk", "Ivan" };
-		//	Console.WriteLine(typeof(System.String.StartsWith())
-			//removeAllstartswith(ls,"Kur");
-			//Console.WriteLine("[{0}]", string.Join(",", ls));
- 
-			string MethodName = "StartsWith";
-			////string	TypeName = "String";
-			//String StringClass = new String("abcd");
-			//Console.WriteLine(StringClass.ToString());
-			//	Type.GetType("System.String");
+			removeAllstartsOrEndsWith(ls,"eo","EndsWith");
+			 Console.WriteLine("[{0}]", string.Join(",", ls));
 
-			//Console.WriteLine("{0}", fullType);
+			//string MethodName = "StartsWith";
+
+			// Console.WriteLine(Applyoperator(1, 2, "Add"));
+		
+			 Console.WriteLine(addOne("hey");
 
 
 
-			//field = this.GetType().GetField(funcName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-			//method = field.GetValue(this) as Delegate;
-			//parameters = (List<int>)method.Method.Invoke(method.Target, new object[1] { parameters });
-
-			// Type StringClass = "System.String".GetType();
-			//MethodInfo[] MetInfo = typeof(string).GetMethods( BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance| BindingFlags.DeclaredOnly);
-			// Console.WriteLine(StringClass.FullName);
-			//String StringInstance = (String)Activator.CreateInstance(StringClass, "abc");
-			//Delegate method = field.GetValue("abc") as Delegate;
-			//bool tru = (bool)method.Method.Invoke(method.Target, new object[1] { "abcd" });
 
 
-			
-		bool tru =(bool)typeof(string).InvokeMember("StartsWith",BindingFlags.InvokeMethod | BindingFlags.Public |  BindingFlags.Instance,null,
-				"bcd",
-				new Object[1] { "abc" });
 
-			MethodInfo  meth = typeof(string).GetMethod("EndsWith", BindingFlags.Public |     BindingFlags.Instance, null, CallingConventions.Any,new Type[] { typeof(string) },null);
-			//Console.WriteLine(meth);
-		 	Del myStartsWith;
-			Delegate test = Delegate.CreateDelegate(typeof(Del), "abcd", meth);
-			 myStartsWith =(Del) test; 
-		//	Console.WriteLine(test != null);
+
+			//	Del myStartsWith;
+			//Delegate test1 = Delegate.CreateDelegate(typeof(Del), "abc", "StartsWith");
+			// myStartsWith =(Del) test1;
+			//Console.WriteLine(myStartsWith("abc"));
+			//Delegate test2 = Delegate.CreateDelegate(typeof(Del), "abc", "EndsWith");
+
+			//	Console.WriteLine(test != null);
 
 			//foreach(MethodInfo mi in Iter(meth))
 			//{
@@ -83,12 +109,7 @@ namespace wksht3Solutions
 			//}
 			//	 Delegate method = memb.GetValue(0) as ;
 			//Console.WriteLine(meth[0].GetType());
-		  Console.WriteLine( myStartsWith("abcd"));
-			//	Del startsWith = new Del(typeof());
 
-			//Delegate(string.StartsWith);
-
-			//parameters = 
 
 
 
@@ -166,7 +187,7 @@ namespace wksht3Solutions
 
 
 		}
-
+		
 		static IEnumerable<MethodInfo>  Iter(IEnumerable<MethodInfo> collec)
 		{
 			foreach (MethodInfo n in collec)
@@ -174,6 +195,7 @@ namespace wksht3Solutions
 			    yield return n;
 			}
 		}
+
 
 	 
 	}
