@@ -130,7 +130,7 @@ namespace wksht3Solutions
 			int[] ar = { 1, 2, 3, 4, 5, 6 };
 
 			Array.Sort(ar, new mySorter());
-			Console.WriteLine("[{0}]", string.Join(",", ar));
+			Console.WriteLine("[{0}]", string.Join(",", ar));//https://stackoverflow.com/questions/35394754/how-to-use-a-custom-comparer-to-sort-an-array-in-a-different-lexical-order
 		}
 
 		public static void IterateOverArrOfStrings(string[] arr) { 
