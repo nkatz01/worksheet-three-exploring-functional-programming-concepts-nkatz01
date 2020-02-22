@@ -50,10 +50,11 @@ namespace wksht3Solutions
 		static Func<List<int>, List<int>> multiply = n => n.Select(i => Applyoperator(i, "*")).ToList();
 		static Func<List<int>, List<int>> subtractOne = n => n.Select(i => Applyoperator(i, "-")).ToList();
 
-		static Func<List<string>, string, string, IEnumerable<string>> Double = (n, condition, s) => n.Select(i =>  conditionTester(condition, i, s) == true ? i = Applyoperator(i, "Double") : i=i ).ToList();
+		static Func<List<string>, string, string, string, IEnumerable<string>> DoubleOrRemove = (n, fn, condition, s) => n.Select(i =>  conditionTester(condition, i, s) == true ? i = Applyoperator(i, fn) : i=i ).ToList();
+	//	static Func<List<string>, string, string, IEnumerable<string>> Remove = (n, condition, s) => n.Select(i => conditionTester(condition, i, s) == true ? i = Applyoperator(i, "Remove") : i = i).ToList();
 
 
-	 	static Func<List<string>, string, string, int> Remove = (n, condition, s) => n.RemoveAll(i => conditionTester(condition, i, s) == true);
+		//static Func<List<string>, string, string, int> Remove = (n, condition, s) => n.RemoveAll(i => conditionTester(condition, i, s) == true);
 
 
 		static public bool conditionTester(string nameOfCond, string s1, string s2)
@@ -132,13 +133,13 @@ namespace wksht3Solutions
 		{
 			List<int> nums = new List<int>() { 1, 2, 3, 4 };
 			List<string> ls = new List<string>() { "Kurnelia", "Qnaki", "Geo", "Muk", "Ivan" };
-		
-			// IEnumerable<string> newls = Double(ls, "Length", "5");
+
+			// IEnumerable<string> newls = DoubleOrRemove(ls, "Double" "Length", "5");
 			//Console.WriteLine("[{0}]", string.Join(",", newls));
 
 
-			Remove(ls, "Length", "5");
-			Console.WriteLine("[{0}]", string.Join(",", ls));
+			//DoubleOrRemove(ls, "Remove", "Length", "5");
+			//Console.WriteLine("[{0}]", string.Join(",", ls));
 
 
 
@@ -150,84 +151,152 @@ namespace wksht3Solutions
 
 
 
-
-
-			//	int[] ar = { 1, 2, 3, 4, 5, 6 };
-
-			List<string> commands = new List<string>();// { "addOne" };
-			List<int> parameters = new List<int>();
-			string userInput = "";
-			int intVal;
-
-
-			while (userInput != "end")
-			{
-
-				Console.Write("Enter integer or string value, press 'end' to stop: ");
-				userInput = Console.ReadLine();
-				if (int.TryParse(userInput, out intVal))
-					parameters.Add(intVal);
-
-			}
-			userInput = "";
-			Program prg = new Program();
-			FieldInfo field;
-			List<string> funcLst = new List<string>();
-			while (userInput != "end")
-			{
-				Console.Write("Enter function: eg 'addOne', 'multiply', 'subtractOne'; and press 'end' to stop: ");
-				userInput = Console.ReadLine();
-				field = prg.GetType().GetField(userInput, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-
-				if (field != null)
-				{
-					funcLst.Add(userInput);
-
-				}
-				else
-				{
-					Console.WriteLine("The command you entered is not recognised");
-				}
-
-			}
-
-			prg.Execute(funcLst, parameters);
+			//int[] ar = { 1, 2, 3, 4, 5, 6 };
 
 
 
+			//	List<int> parameters =  ProcessDataInput<int>("Enter integer or string value, press 'end' to stop: ", "end",false); 
+			// List<string> commands = Program.ProcessCommandInput<string>("Enter function: eg 'addOne', 'multiply', 'subtractOne'; and press 'end' to stop: ", "end");
+
+			//  Program.Execute(commands, parameters, false);
+
+			List<string> parameters = ProcessDataInput<string>("Enter name of someone who comes to the party and press 'end' to finish entering: ", "end", true);
+			List<string> commands = ProcessDataInput<string>("Enter function: eg 'Double', 'Remove', followed by the condition: eg, 'StartsWith', 'EndsWith', 'Length', followed by the value: eg 'wor', 'ord' or '5', all seperated by spaces, and press 'end' to stop: ", "end",true);
+			//  Console.WriteLine("{0}", string.Join(",", parameters));
+ 			
+
+			 	Program.Execute(commands, parameters, true);
 
 
 
 
 		}
 
-		//	public  T[][] ProcessInput<T>() {
+		static  public List<T> ProcessDataInput<T>(string prompt, string stopper, bool partyMode)
+        {
+            List<T> parameters = new List<T>();
+            string userInput = "";
+            int intVal;
+			string[] array = { };
+			while (userInput != stopper)
+            {
 
-		//		T[][] array = commandsAndData = new Array(
+                Console.Write(prompt);
+                userInput = Console.ReadLine();
+				if (!partyMode)
+				{
+					if (int.TryParse(userInput, out intVal))
+						parameters.Add((T)(object)intVal);
+				}
+				else
+				{
+					array = userInput.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+					foreach (string s in array)
+					{	if (userInput!=stopper)
+						parameters.Add((T)(object)s);
+					}
+				}
+            }
+
+            return parameters;//(T)(List<T>)(List<T>)(List<Object>)
+
+
+        }
+
+	static	public List<T> ProcessCommandInput<T>(string prompt, string stopper)
+		{
+			List<T> commands = new List<T>();// { "addOne" };
+			string userInput = "";
+			Program prg = new Program();
+			FieldInfo field;
+		
+
+			while (userInput != stopper)
+			{
+				Console.Write(prompt);
+
+				//T[] array1 = getOneArray();
+				//T[] array2 = getAnotherArray();
+				//int array1OriginalLength = array1.Length;
+				//Array.Resize<T>(ref array1, array1OriginalLength + array2.Length);
+				//Array.Copy(array2, 0, array1, array1OriginalLength, array2.Length);
+
+				userInput = Console.ReadLine();
+				
+				//if (array.Length ==1)
+				field = prg.GetType().GetField(userInput, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
+
+				if (field != null)
+				{
+				 
+						commands.Add((T)(object)userInput);
+					 
+				}
+				else
+				{	if (userInput != stopper)
+					Console.WriteLine("The command you entered is not recognised");
+				}
+
+
+			}
+			return commands;
+		}
+
+	static	public void Execute<T>(List<string> funcLst, List<T> parameters, bool partyMode)//https://stackoverflow.com/questions/6010555/how-to-call-delegate-from-string-in-c
+		{
+			FieldInfo field;
+			Delegate method;
+			Program program = new Program();
+
+			if (!partyMode)
+			{
+				foreach (string funcName in funcLst)
+				{
+					field = program.GetType().GetField(funcName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
+					method = field.GetValue(program) as Delegate;
+					parameters = (List<T>)(object)method.Method.Invoke(method.Target, new object[1] { parameters });//print(modified.ToList())IEnumerable<int>
+				}
+				print((List<int>)(object)parameters);
+				return;
+			}
+
+			else
+			{   Console.WriteLine(funcLst.Count());
+				for (int i = 3; i <= funcLst.Count(); i += 3)
+				{
+					//Console.WriteLine(funcLst.ElementAt(i-3));
+					field = program.GetType().GetField("DoubleOrRemove", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
+					method = field.GetValue(program) as Delegate;
+					parameters = (List<T>)(object)method.Method.Invoke(method.Target, new object[4] { parameters, funcLst[i - 3], funcLst[i-2],funcLst[i-1] });
+				}
+				//print((List<string>)(object)parameters);
+				parameters.RemoveAll(i => (string)(object)i == "");
+				Console.WriteLine("{0}", string.Join(",", parameters));
+				return;
+			}
+
+		
+		}
+
+
+		//static public void Execute(List<string> funcLst, List<int> parameters)//https://stackoverflow.com/questions/6010555/how-to-call-delegate-from-string-in-c
+		//{
+		//	FieldInfo field;
+		//	Delegate method;
+		//	List<int> ls = new List<int>();
+		//	foreach (string funcName in funcLst)
+		//	{
+		//		Program program = new Program();
+		//		field = program.GetType().GetField(funcName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
+		//		method = field.GetValue(program) as Delegate;
+		//		parameters = (List<int>)method.Method.Invoke(method.Target, new object[1] { parameters });//print(modified.ToList())IEnumerable<int>
+		//	}
+		//	print(parameters);
 
 
 
 		//}
 
-
-		public void Execute(List<string> funcLst, List<int> parameters)//https://stackoverflow.com/questions/6010555/how-to-call-delegate-from-string-in-c
-		{
-			FieldInfo field;
-			Delegate method;
-			List<int> ls = new List<int>();
-			foreach (string funcName in funcLst)
-			{
-				 
-					field = this.GetType().GetField(funcName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-					method = field.GetValue(this) as Delegate;
-				parameters = (List<int>)method.Method.Invoke(method.Target, new object[1] { parameters });//print(modified.ToList())IEnumerable<int>
-			}
-			print(parameters);
-
-
-
-		}
-		
 		static IEnumerable<int>  Iter(IEnumerable<int> collec)
 		{
 			foreach (int n in collec)
