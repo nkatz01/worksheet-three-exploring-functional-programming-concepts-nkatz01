@@ -21,20 +21,23 @@ namespace wksht3Solutions
 		//referring to 6
 		static Func<List<int>, Predicate<int>, List<int>> predTester = (n, p) => n.Where(i => p(i) == true).Select(i => i).Reverse().ToList();
 
+
+		Action<string[]> print = delegate (string[] arr)
+		{
+
+			foreach (string str in arr)
+			{
+
+				Console.WriteLine(str);
+			}
+		};
+
 		public static void Main(String[] args)
         {
 
  
 //question 1 (preffered)
-            Action<string[]> print = delegate (string[] arr)
-            {
-
-                foreach (string str in arr)
-                {
-
-                    Console.WriteLine(str);
-                }
-            };
+         
 
             print(args);
 
@@ -63,9 +66,9 @@ namespace wksht3Solutions
 
 
 //3
-			/* if (args.Length!=0){
+			  if (args.Length!=0){
 		Console.WriteLine(returnMinFrmCollec(args.Select(int.Parse).ToList()));
-		} */
+		}  
 
 //4
 

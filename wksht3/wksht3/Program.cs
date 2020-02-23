@@ -161,13 +161,13 @@ namespace wksht3Solutions
 			//  Program.Execute(commands, parameters, false);
 
 			List<string> parameters = ProcessDataInput<string>("Enter name of someone who comes to the party and press 'end' to finish entering: ", "end", true);
-			List<string> commands = ProcessDataInput<string>("Enter function: eg 'Double', 'Remove', followed by the condition: eg, 'StartsWith', 'EndsWith', 'Length', followed by the value: eg 'wor', 'ord' or '5', all seperated by spaces, and press 'end' to stop: ", "end",true);
+			List<string> commands = ProcessDataInput<string>("Enter function: eg 'Double', 'Remove', followed by the condition: eg, 'StartsWith', 'EndsWith', 'Length', followed by the value: eg 'wor', 'ord' or '5', all seperated by spaces; press 'party!' to stop: ", "party!",true);
 			//  Console.WriteLine("{0}", string.Join(",", parameters));
  			
 
 			 	Program.Execute(commands, parameters, true);
 
-
+			
 
 
 		}
