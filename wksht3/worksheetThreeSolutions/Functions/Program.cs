@@ -25,7 +25,7 @@ namespace Functions
 			else
 			{
 				return source.Replace(source, "");
-				//	sb.Insert(0, "Rmoved");
+				
 			}
 
 		}
@@ -57,11 +57,7 @@ namespace Functions
 
 		public static void Main(string[] args )
 		{
-			//Console.WriteLine("blublu");
-			//Assembly currentAssem = Assembly.GetExecutingAssembly();
-			//Console.WriteLine(typeof(Program).AssemblyQualifiedName);
-			//AppDomain root = AppDomain.CurrentDomain;
-			//Console.WriteLine(root);
+			
 
 		}
 		public void sayBla() {
@@ -132,7 +128,7 @@ namespace Functions
 				}
 			}
 
-			return parameters;//(T)(List<T>)(List<T>)(List<Object>)
+			return parameters;
 
 
 		}
@@ -142,10 +138,9 @@ namespace Functions
 			List<T> commands = new List<T>(56);
 			string userInput = "";
 
-			var obj = Activator.CreateInstance(type);// as typeof(Functions.Program);//(Functions.Program)
-			Type compileType = obj.GetType();
-			//var method = compileType.GetMethod("sayBla");
-			//method.Invoke(compileType, null);
+			var obj = Activator.CreateInstance(type);
+			Type compileTimeType = obj.GetType();
+			
 
 			FieldInfo field;
 
@@ -156,7 +151,7 @@ namespace Functions
 
 				userInput = Console.ReadLine();
 
-				field = compileType.GetField(userInput, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
+				field = compileTimeType.GetField(userInput, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
 
 				if (field != null)
 				{
@@ -174,19 +169,19 @@ namespace Functions
 			}
 			return commands;
 		}
-		static public void Execute<T>(List<string> funcLst, List<T> parameters,  bool partyMode, Type type)//https://stackoverflow.com/questions/6010555/how-to-call-delegate-from-string-in-c string nameSpace,
+		static public void Execute<T>(List<string> funcLst, List<T> parameters,  bool partyMode, Type type)//https://stackoverflow.com/questions/6010555/how-to-call-delegate-from-string-in-c 
 		{
 			FieldInfo field;
 			Delegate method;
-			var obj = Activator.CreateInstance(type);// as typeof(Functions.Program);//(Functions.Program)
-			Type compileType = obj.GetType();
+			var obj = Activator.CreateInstance(type);
+			Type compileTimeType = obj.GetType();
 
 			if (!partyMode)
 			{
 				foreach (string funcName in funcLst)
 				{
-					field = compileType.GetField(funcName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
-					method = field.GetValue(compileType) as Delegate;
+					field = compileTimeType.GetField(funcName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
+					method = field.GetValue(compileTimeType) as Delegate;
 					parameters = (List<T>)(object)method.Method.Invoke(method.Target, new object[1] { parameters });
 				}
 				print((List<int>)(object)parameters);
@@ -195,11 +190,11 @@ namespace Functions
 
 			else
 			{
-				field = compileType.GetField("DoubleOrRemove", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
+				field = compileTimeType.GetField("DoubleOrRemove", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
 				for (int i = 3; i <= funcLst.Count(); i += 3)
 				{
 
-					method = field.GetValue(compileType) as Delegate;
+					method = field.GetValue(compileTimeType) as Delegate;
 					parameters = (List<T>)(object)method.Method.Invoke(method.Target, new object[4] { parameters, funcLst[i - 3], funcLst[i - 2], funcLst[i - 1] });
 				}
 

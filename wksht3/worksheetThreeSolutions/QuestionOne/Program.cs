@@ -3,12 +3,12 @@
 
 namespace QuestionOne
 {
-   public class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-           // String[] newargs = { "heyafsdfsdf"};
-           // wksht3Solutions.Program.Main(newargs);
+            // String[] newargs = { "heyafsdfsdf"};
+            // wksht3Solutions.Program.Main(newargs);
             print(args);
 
 
@@ -30,7 +30,7 @@ namespace QuestionOne
 
         }
 
-        static  Action<string[]> print = delegate (string[] arr)
+        static Action<string[]> print = delegate (string[] arr)
         {
 
             foreach (string str in arr)
