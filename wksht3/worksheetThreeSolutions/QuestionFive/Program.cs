@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Remoting;
 
+
 namespace QuestionFive
 {
 
@@ -31,7 +32,7 @@ namespace QuestionFive
 
 		 
 			 
-		 	Functions.Program.Execute(commands, parameters, false, typeof(QuestionFive.Program));
+		 	 Execute(commands, parameters );
 
 
 		}
@@ -93,7 +94,7 @@ namespace QuestionFive
 			return commands;
 		}
 
-		static public void Execute<T>(List<string> funcLst, List<int> parameters){
+		static public void Execute(List<string> funcLst, List<int> parameters){
 
 			List<int> results = parameters;
 				foreach (string funcName in funcLst)

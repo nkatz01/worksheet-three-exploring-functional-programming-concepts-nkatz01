@@ -5,27 +5,25 @@ VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "worksheetThreeSolutions", "worksheetThreeSolutions\worksheetThreeSolutions.csproj", "{05320D75-0AFA-4942-AAE6-AA43DF92D7DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestionOne", "QuestionOne\QuestionOne.csproj", "{314B12CE-75F4-409B-B4F9-9810D3C0F6D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuestionOne", "QuestionOne\QuestionOne.csproj", "{314B12CE-75F4-409B-B4F9-9810D3C0F6D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestionTwo", "QuestionTwo\QuestionTwo.csproj", "{94BBC05D-A8AD-4802-91D6-48CA24994319}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuestionTwo", "QuestionTwo\QuestionTwo.csproj", "{94BBC05D-A8AD-4802-91D6-48CA24994319}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestionThree", "QuestionThree\QuestionThree.csproj", "{65C03CFE-02E1-433C-9364-ED5651D4BC52}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuestionThree", "QuestionThree\QuestionThree.csproj", "{65C03CFE-02E1-433C-9364-ED5651D4BC52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestionFour", "QuestionFour\QuestionFour.csproj", "{152DE745-D2B4-469C-B1D8-0878D1771080}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuestionFour", "QuestionFour\QuestionFour.csproj", "{152DE745-D2B4-469C-B1D8-0878D1771080}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestionFive", "QuestionFive\QuestionFive.csproj", "{DD5D141A-8B75-4E73-AF86-B54A0FDB021B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuestionFive", "QuestionFive\QuestionFive.csproj", "{DD5D141A-8B75-4E73-AF86-B54A0FDB021B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Functions", "Functions\Functions.csproj", "{325868EF-5B89-4D14-A1D4-443CB13D4C6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuestionSix", "QuestionSix\QuestionSix.csproj", "{5A115391-C208-4904-AE55-4DF7D268AC31}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestionSix", "QuestionSix\QuestionSix.csproj", "{5A115391-C208-4904-AE55-4DF7D268AC31}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuestionSeven", "QuestionSeven\QuestionSeven.csproj", "{0B8B7387-4D9A-49A6-A898-550846B14D5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestionSeven", "QuestionSeven\QuestionSeven.csproj", "{0B8B7387-4D9A-49A6-A898-550846B14D5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuestionEight", "QuestionEight\QuestionEight.csproj", "{528CF480-C93F-40E9-A991-70C6C91C4222}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestionEight", "QuestionEight\QuestionEight.csproj", "{528CF480-C93F-40E9-A991-70C6C91C4222}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuestionNine", "QuestionNine\QuestionNine.csproj", "{E158FEB5-4130-4927-9AAA-73D0E31F40A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestionNine", "QuestionNine\QuestionNine.csproj", "{E158FEB5-4130-4927-9AAA-73D0E31F40A6}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestionTen", "QuestionTen\QuestionTen.csproj", "{483DCCD6-C81C-42D8-96EF-6ED96D73355D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuestionTen", "QuestionTen\QuestionTen.csproj", "{483DCCD6-C81C-42D8-96EF-6ED96D73355D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,10 +55,6 @@ Global
 		{DD5D141A-8B75-4E73-AF86-B54A0FDB021B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD5D141A-8B75-4E73-AF86-B54A0FDB021B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD5D141A-8B75-4E73-AF86-B54A0FDB021B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{325868EF-5B89-4D14-A1D4-443CB13D4C6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{325868EF-5B89-4D14-A1D4-443CB13D4C6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{325868EF-5B89-4D14-A1D4-443CB13D4C6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{325868EF-5B89-4D14-A1D4-443CB13D4C6F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5A115391-C208-4904-AE55-4DF7D268AC31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5A115391-C208-4904-AE55-4DF7D268AC31}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A115391-C208-4904-AE55-4DF7D268AC31}.Release|Any CPU.ActiveCfg = Release|Any CPU
